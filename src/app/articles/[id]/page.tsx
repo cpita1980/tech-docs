@@ -1,1 +1,1 @@
-// This file is intentionally left blank after being identified as a source of a build bug.
+export default function ArticlePage() { return null; } // This file is intentionally left blank to resolve a build issue.
