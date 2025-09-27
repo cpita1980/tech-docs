@@ -37,7 +37,7 @@ export default async function Home() {
             {articles.map((article) => (
               <Grid item key={article.id} xs={12} sm={6} md={4}>
                 <Card sx={{ height: "100%" }}>
-                  <CardActionArea component={Link} href={`/articles/${article.id}`} sx={{ height: "100%" }}>
+                  <CardActionArea component={Link} href={`/article?id=${article.id}`} sx={{ height: "100%" }}>
                     <CardContent>
                       <Typography variant="h5" component="h2" gutterBottom>
                         {article.title}
