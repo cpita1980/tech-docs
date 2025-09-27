@@ -7,14 +7,13 @@ import { Container, Typography, Box, CircularProgress } from "@mui/material";
 import ArticleRenderer from "@/components/ArticleRenderer";
 import { OutputData } from '@editorjs/editorjs';
 
+import { OutputData } from '@editorjs/editorjs';
+
+// Define a type for the article structure
 interface Article {
   id: string;
   title: string;
-  content: any;
-  createdAt: string;
-  author: { name: string | null } | null;
-  category: { name: string };
-}
+  content: OutputData; // Use the correct type instead of any
 
 function ArticleView() {
   const searchParams = useSearchParams();
