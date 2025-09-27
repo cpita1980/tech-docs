@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, { type Session, type User } from "next-auth"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import GoogleProvider from "next-auth/providers/google"
 import GitHubProvider from "next-auth/providers/github"
@@ -18,8 +18,8 @@ const authOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    session({ session, user }) {
-      if (session.user) {
+    session: ({ session, user }: { session: Session; user: User }) => {
+      if (session?.user) {
         session.user.id = user.id;
       }
       return session;
