@@ -3,12 +3,14 @@ import prisma from "@/lib/prisma";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
+  const { id } = context.params;
+
   try {
     const article = await prisma.article.findUnique({
       where: {
-        id: params.id,
+        id: id,
         published: true, // Only return published articles
       },
       include: {
