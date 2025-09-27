@@ -1,16 +1,14 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 export async function GET(
-  request: Request,
-  context: { params: { id: string } }
-) {
-  const { id } = context.params;
-
+  request: NextRequest, // Use NextRequest for more specific typing
+  { params }: { params: { id: string } }
+): Promise<NextResponse> { // Explicitly type the return promise
   try {
     const article = await prisma.article.findUnique({
       where: {
-        id: id,
+        id: params.id,
         published: true, // Only return published articles
       },
       include: {
@@ -22,6 +20,7 @@ export async function GET(
     if (!article) {
       return new NextResponse(JSON.stringify({ error: "Article not found" }), {
         status: 404,
+        headers: { "Content-Type": "application/json" },
       });
     }
 
@@ -30,6 +29,7 @@ export async function GET(
     console.error("Article GET API Error:", error);
     return new NextResponse(JSON.stringify({ error: "An error occurred" }), {
       status: 500,
+      headers: { "Content-Type": "application/json" },
     });
   }
 }
