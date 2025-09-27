@@ -14,6 +14,7 @@ interface Article {
   id: string;
   title: string;
   content: OutputData; // Use the correct type instead of any
+}
 
 function ArticleView() {
   const searchParams = useSearchParams();
