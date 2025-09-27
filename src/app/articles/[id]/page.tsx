@@ -5,13 +5,7 @@ import { Container, Typography, Box } from "@mui/material";
 import ArticleRenderer from "@/components/ArticleRenderer";
 import { OutputData } from "@editorjs/editorjs";
 
-interface ArticlePageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function ArticlePage({ params }: ArticlePageProps) {
+export default async function ArticlePage({ params }: { params: { id: string } }) {
   const article = await prisma.article.findUnique({
     where: { id: params.id },
     include: { author: true, category: true },
