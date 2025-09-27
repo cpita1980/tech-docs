@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -25,6 +26,9 @@ export default function Header() {
             <div />
           ) : session ? (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Button component={Link} href="/admin/new-post" variant="contained" color="secondary" sx={{ mr: 2 }}>
+                Crear Post
+              </Button>
               <IconButton sx={{ p: 0, mr: 1.5 }}>
                 <Avatar alt={session.user?.name || 'User'} src={session.user?.image || ''} />
               </IconButton>
