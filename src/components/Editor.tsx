@@ -2,17 +2,17 @@
 
 import React, { useEffect, useRef } from 'react';
 import EditorJS, { OutputData } from '@editorjs/editorjs';
-// @ts-expect-error
+// @ts-expect-error: Plugin lacks official types
 import Header from '@editorjs/header';
-// @ts-expect-error
+// @ts-expect-error: Plugin lacks official types
 import List from '@editorjs/list';
-// @ts-expect-error
+// @ts-expect-error: Plugin lacks official types
 import CodeTool from '@editorjs/code';
-// @ts-expect-error
+// @ts-expect-error: Plugin lacks official types
 import Paragraph from '@editorjs/paragraph';
-// @ts-expect-error
+// @ts-expect-error: Plugin lacks official types
 import Quote from '@editorjs/quote';
-// @ts-expect-error
+// @ts-expect-error: Plugin lacks official types
 import Delimiter from '@editorjs/delimiter';
 
 interface EditorProps {
