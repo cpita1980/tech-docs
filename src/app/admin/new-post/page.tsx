@@ -2,16 +2,21 @@
 
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Editor from '@/components/Editor';
-import { Container, Typography, Box, CircularProgress, TextField, Button } from '@mui/material';
+import { Container, Typography, Box, CircularProgress, TextField, Button, Switch, FormControlLabel } from '@mui/material';
 import { OutputData } from '@editorjs/editorjs';
 
 export default function NewPostPage() {
   const { data: session, status } = useSession();
+  const router = useRouter();
+  
   const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
   const [content, setContent] = useState<OutputData>();
+  const [isPublished, setIsPublished] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   if (status === 'loading') {
     return (
@@ -25,34 +30,81 @@ export default function NewPostPage() {
     redirect("/api/auth/signin?callbackUrl=/admin/new-post");
   }
 
-  const handleSave = () => {
-    console.log("Title:", title);
-    console.log("Content:", content);
-    // Aquí irá la lógica para llamar a la API y guardar
-    alert("Funcionalidad de guardado no implementada aún. Revisa la consola del navegador.");
+  const handleSave = async () => {
+    if (!title || !category || !content) {
+      alert("Por favor, completa todos los campos: título, categoría y contenido.");
+      return;
+    }
+    setIsSaving(true);
+
+    try {
+      // 1. Find or create the category
+      const categoryResponse = await fetch('/api/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: category }),
+      });
+      if (!categoryResponse.ok) throw new Error('Failed to create category');
+      const categoryData = await categoryResponse.json();
+
+      // 2. Create the article
+      const articleResponse = await fetch('/api/articles', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title,
+          content,
+          categoryId: categoryData.id,
+          published: isPublished,
+        }),
+      });
+
+      if (!articleResponse.ok) throw new Error('Failed to create article');
+      
+      alert("¡Artículo guardado con éxito!");
+      router.push('/'); // Redirect to homepage
+
+    } catch (error) {
+      console.error(error);
+      alert("Hubo un error al guardar el artículo.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
     <Box>
       <Header />
-      <Container sx={{ mt: 4 }}>
+      <Container sx={{ mt: 4, pb: 8 }}>
         <Typography variant="h4" component="h1" gutterBottom>
           Crear Nuevo Artículo
         </Typography>
         
-        <TextField
-          label="Título del Artículo"
-          fullWidth
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          sx={{ mb: 2 }}
-        />
+        <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+          <TextField
+            label="Título del Artículo"
+            fullWidth
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <TextField
+            label="Categoría"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
+        </Box>
 
         <Editor data={content} onChange={setContent} />
 
-        <Button variant="contained" color="primary" onClick={handleSave} sx={{ mt: 2 }}>
-          Guardar Artículo
-        </Button>
+        <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <FormControlLabel
+            control={<Switch checked={isPublished} onChange={(e) => setIsPublished(e.target.checked)} />}
+            label="Publicar inmediatamente"
+          />
+          <Button variant="contained" color="primary" onClick={handleSave} disabled={isSaving}>
+            {isSaving ? <CircularProgress size={24} /> : 'Guardar Artículo'}
+          </Button>
+        </Box>
       </Container>
     </Box>
   );
