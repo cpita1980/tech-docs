@@ -2,17 +2,17 @@
 
 import React, { useEffect, useRef } from 'react';
 import EditorJS, { OutputData } from '@editorjs/editorjs';
-// @ts-ignore
+// @ts-expect-error
 import Header from '@editorjs/header';
-// @ts-ignore
+// @ts-expect-error
 import List from '@editorjs/list';
-// @ts-ignore
+// @ts-expect-error
 import CodeTool from '@editorjs/code';
-// @ts-ignore
+// @ts-expect-error
 import Paragraph from '@editorjs/paragraph';
-// @ts-ignore
+// @ts-expect-error
 import Quote from '@editorjs/quote';
-// @ts-ignore
+// @ts-expect-error
 import Delimiter from '@editorjs/delimiter';
 
 interface EditorProps {

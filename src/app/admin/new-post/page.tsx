@@ -9,7 +9,7 @@ import { Container, Typography, Box, CircularProgress, TextField, Button, Switch
 import { OutputData } from '@editorjs/editorjs';
 
 export default function NewPostPage() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
   
   const [title, setTitle] = useState('');
