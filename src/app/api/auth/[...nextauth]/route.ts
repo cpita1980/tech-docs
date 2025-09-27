@@ -19,7 +19,9 @@ const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     session({ session, user }) {
-      session.user.id = user.id;
+      if (session.user) {
+        session.user.id = user.id;
+      }
       return session;
     },
   },
