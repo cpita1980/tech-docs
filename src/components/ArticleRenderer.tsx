@@ -4,14 +4,18 @@ import React from 'react';
 import { OutputData } from '@editorjs/editorjs';
 
 const ArticleRenderer = ({ data }: { data: OutputData }) => {
+  const renderHeader = (block: { id?: string; data: { level: number; text: string } }) => {
+    const level = block.data.level;
+    const HeaderTag = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+    return <HeaderTag key={block.id} dangerouslySetInnerHTML={{ __html: block.data.text }} />;
+  };
+
   return (
     <div className="prose lg:prose-xl">
       {data.blocks.map((block) => {
         switch (block.type) {
           case 'header':
-            const level = block.data.level;
-            const Tag = `h${level}` as keyof JSX.IntrinsicElements;
-            return <Tag key={block.id} dangerouslySetInnerHTML={{ __html: block.data.text }} />;
+            return renderHeader(block as { id?: string; data: { level: number; text: string } });
           case 'paragraph':
             return <p key={block.id} dangerouslySetInnerHTML={{ __html: block.data.text }} />;
           case 'list':
