@@ -26,8 +26,8 @@ export default function Header() {
             <div />
           ) : session ? (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Button component={Link} href="/admin/new-post" variant="contained" color="secondary" sx={{ mr: 2 }}>
-                Crear Post
+              <Button component={Link} href="/admin/books/new" variant="contained" color="secondary" sx={{ mr: 2 }}>
+                Nuevo Libro
               </Button>
               <IconButton sx={{ p: 0, mr: 1.5 }}>
                 <Avatar alt={session.user?.name || 'User'} src={session.user?.image || ''} />

@@ -1,26 +1,30 @@
 import Header from "@/components/Header";
+import BookCard from "@/components/BookCard";
 import prisma from "@/lib/prisma";
-import Link from "next/link";
 import {
   Container,
   Typography,
-  Card,
-  CardContent,
-  CardActionArea,
   Box,
+  Button,
 } from "@mui/material";
+import { Add as AddIcon } from "@mui/icons-material";
+import Link from "next/link";
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
-  const articles = await prisma.article.findMany({
+  const books = await prisma.book.findMany({
     where: { published: true },
     include: {
-      author: true,
-      category: true,
+      _count: {
+        select: {
+          chapters: true,
+          pages: true,
+        },
+      },
     },
     orderBy: {
-      createdAt: "desc",
+      position: "asc",
     },
   });
 
@@ -28,11 +32,42 @@ export default async function Home() {
     <Box>
       <Header />
       <Container sx={{ mt: 4 }}>
-        <Typography variant="h3" component="h1" gutterBottom>
-          Últimos Artículos
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+          <Typography variant="h3" component="h1">
+            Biblioteca de Documentación
+          </Typography>
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            component={Link}
+            href="/admin/books/new"
+          >
+            Nuevo Libro
+          </Button>
+        </Box>
+
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+          Explora nuestra colección de libros, capítulos y páginas de documentación técnica
         </Typography>
-        {articles.length === 0 ? (
-          <Typography>Aún no hay artículos publicados. ¡Crea uno!</Typography>
+
+        {books.length === 0 ? (
+          <Box sx={{ textAlign: 'center', py: 8 }}>
+            <Typography variant="h6" color="text.secondary" gutterBottom>
+              No hay libros disponibles
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+              Comienza creando tu primer libro de documentación
+            </Typography>
+            <Button
+              variant="contained"
+              startIcon={<AddIcon />}
+              component={Link}
+              href="/admin/books/new"
+              size="large"
+            >
+              Crear Primer Libro
+            </Button>
+          </Box>
         ) : (
           <Box
             sx={{
@@ -41,28 +76,22 @@ export default async function Home() {
                 xs: '1fr',
                 sm: 'repeat(2, 1fr)',
                 md: 'repeat(3, 1fr)',
+                lg: 'repeat(4, 1fr)',
               },
-              gap: 4,
+              gap: 3,
             }}
           >
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-            {articles.map((article: any) => (
-              <Card key={article.id} sx={{ height: "100%" }}>
-                <CardActionArea component={Link} href={`/articles/${article.id}`} sx={{ height: "100%" }}>
-                  <CardContent>
-                    <Typography variant="h5" component="h2" gutterBottom>
-                      {article.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Por {article.author?.name || "Anónimo"} en {" "}
-                      {article.category.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                      {new Date(article.createdAt).toLocaleDateString()}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+            {books.map((book) => (
+              <BookCard
+                key={book.id}
+                slug={book.slug}
+                name={book.name}
+                description={book.description}
+                cover={book.cover}
+                pagesCount={book._count.pages}
+                chaptersCount={book._count.chapters}
+                updatedAt={book.updatedAt}
+              />
             ))}
           </Box>
         )}

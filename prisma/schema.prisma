@@ -10,19 +10,173 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Core Models
+// Core Models - BookStack Structure
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
+  role          String     @default("user") // user, editor, admin
   accounts      Account[]
   sessions      Session[]
-  articles      Article[]
+  books         Book[]
+  chapters      Chapter[]
+  pages         Page[]
+  favorites     Favorite[]
+  activities    Activity[]
 }
 
+model Book {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  description String?   @db.Text
+  cover       String?   // URL de la imagen de portada
+  published   Boolean   @default(false)
+  position    Int       @default(0) // Para ordenar
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+
+  chapters    Chapter[]
+  pages       Page[]    // Páginas directas sin capítulo
+  tags        TagOnBook[]
+  favorites   Favorite[]
+  activities  Activity[]
+
+  @@index([slug])
+  @@index([published])
+}
+
+model Chapter {
+  id          String   @id @default(cuid())
+  slug        String
+  name        String
+  description String?  @db.Text
+  position    Int      @default(0)
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  book        Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId      String
+
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+
+  pages       Page[]
+  activities  Activity[]
+
+  @@unique([bookId, slug])
+  @@index([bookId])
+}
+
+model Page {
+  id          String   @id @default(cuid())
+  slug        String
+  title       String
+  content     Json     // Editor.js content
+  draft       Json?    // Borrador
+  published   Boolean  @default(false)
+  position    Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  book        Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId      String
+
+  chapter     Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  chapterId   String?
+
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+
+  tags        TagOnPage[]
+  favorites   Favorite[]
+  activities  Activity[]
+
+  @@unique([bookId, slug])
+  @@index([bookId])
+  @@index([chapterId])
+  @@index([published])
+}
+
+model Tag {
+  id        String      @id @default(cuid())
+  name      String      @unique
+  color     String?     // Hex color
+  createdAt DateTime    @default(now())
+
+  books     TagOnBook[]
+  pages     TagOnPage[]
+}
+
+model TagOnBook {
+  book      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId    String
+  tag       Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  tagId     String
+
+  @@id([bookId, tagId])
+}
+
+model TagOnPage {
+  page      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  pageId    String
+  tag       Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  tagId     String
+
+  @@id([pageId, tagId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+
+  book      Book?    @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId    String?
+
+  page      Page?    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  pageId    String?
+
+  @@unique([userId, bookId])
+  @@unique([userId, pageId])
+  @@index([userId])
+}
+
+model Activity {
+  id          String   @id @default(cuid())
+  action      String   // created, updated, deleted, published
+  entityType  String   // book, chapter, page
+  entityId    String
+  details     String?  @db.Text
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+
+  book        Book?    @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId      String?
+
+  chapter     Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  chapterId   String?
+
+  page        Page?    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  pageId      String?
+
+  @@index([userId])
+  @@index([createdAt])
+  @@index([entityType, entityId])
+}
+
+// Legacy model - mantener por compatibilidad, migrar datos a Book/Page
 model Category {
   id       String    @id @default(cuid())
   name     String    @unique
