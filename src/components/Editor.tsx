@@ -2,17 +2,11 @@
 
 import React, { useEffect, useRef } from 'react';
 import EditorJS, { OutputData } from '@editorjs/editorjs';
-// @ts-expect-error: Plugin lacks official types
 import Header from '@editorjs/header';
-// @ts-expect-error: Plugin lacks official types
 import List from '@editorjs/list';
-// @ts-expect-error: Plugin lacks official types
 import CodeTool from '@editorjs/code';
-// @ts-expect-error: Plugin lacks official types
 import Paragraph from '@editorjs/paragraph';
-// @ts-expect-error: Plugin lacks official types
 import Quote from '@editorjs/quote';
-// @ts-expect-error: Plugin lacks official types
 import Delimiter from '@editorjs/delimiter';
 
 interface EditorProps {
@@ -46,12 +40,21 @@ const Editor: React.FC<EditorProps> = ({ data, onChange }) => {
     }
 
     return () => {
-      if (editorRef.current && editorRef.current.destroy) {
-        editorRef.current.destroy();
+      if (editorRef.current && typeof editorRef.current.destroy === 'function') {
+        // EditorJS destroy method might be async or sync depending on version, 
+        // but reliable cleanup matches component unmount.
+        // checking function existence is safe practice.
+        try {
+          editorRef.current.destroy();
+        } catch (e) {
+          console.error('Editor cleanup failed', e);
+        }
         editorRef.current = null;
       }
     };
-  }, [data, onChange]);
+    // data is excluded from dependency array to prevent re-init on every keystroke
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <div id="editorjs" style={{ border: '1px solid #ccc', borderRadius: '4px', padding: '16px' }} />;
 };

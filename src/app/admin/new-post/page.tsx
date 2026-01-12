@@ -4,14 +4,16 @@ import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { redirect, useRouter } from 'next/navigation';
 import Header from '@/components/Header';
-import Editor from '@/components/Editor';
+import dynamic from 'next/dynamic';
+
+const Editor = dynamic(() => import('@/components/Editor'), { ssr: false });
 import { Container, Typography, Box, CircularProgress, TextField, Button, Switch, FormControlLabel } from '@mui/material';
 import { OutputData } from '@editorjs/editorjs';
 
 export default function NewPostPage() {
   const { status } = useSession();
   const router = useRouter();
-  
+
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [content, setContent] = useState<OutputData>();
@@ -60,7 +62,7 @@ export default function NewPostPage() {
       });
 
       if (!articleResponse.ok) throw new Error('Failed to create article');
-      
+
       alert("¡Artículo guardado con éxito!");
       router.push('/'); // Redirect to homepage
 
@@ -79,7 +81,7 @@ export default function NewPostPage() {
         <Typography variant="h4" component="h1" gutterBottom>
           Crear Nuevo Artículo
         </Typography>
-        
+
         <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
           <TextField
             label="Título del Artículo"

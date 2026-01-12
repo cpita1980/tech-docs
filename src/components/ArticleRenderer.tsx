@@ -10,7 +10,8 @@ const ArticleRenderer = ({ data }: { data: OutputData }) => {
         switch (block.type) {
           case 'header':
             const level = block.data.level;
-            const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const Tag = `h${level}` as any;
             return <Tag key={block.id} dangerouslySetInnerHTML={{ __html: block.data.text }} />;
           case 'paragraph':
             return <p key={block.id} dangerouslySetInnerHTML={{ __html: block.data.text }} />;

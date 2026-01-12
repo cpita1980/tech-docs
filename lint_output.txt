@@ -1,0 +1,19 @@
+
+> tech-docs@0.1.0 lint
+> eslint
+
+
+E:\02-GIT_REPOS\GKSISTEMAS\tech-docs\src\app\api\articles\[id]\route.ts
+  19:14  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+  54:47  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  59:14  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+  88:14  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+
+E:\02-GIT_REPOS\GKSISTEMAS\tech-docs\src\app\api\articles\route.ts
+  25:29  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\02-GIT_REPOS\GKSISTEMAS\tech-docs\src\app\page.tsx
+  23:6  warning  'ArticleWithDetails' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 6 problems (2 errors, 4 warnings)
+

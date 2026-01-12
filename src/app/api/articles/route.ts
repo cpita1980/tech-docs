@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
+import { articleSchema } from "@/lib/validations";
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
@@ -10,16 +11,20 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { title, content, categoryId, published } = await request.json();
+    const json = await request.json();
+    const body = articleSchema.safeParse(json);
 
-    if (!title || !content || !categoryId) {
-      return new NextResponse(JSON.stringify({ error: "Missing required fields" }), { status: 400 });
+    if (!body.success) {
+      return new NextResponse(JSON.stringify({ error: body.error }), { status: 400 });
     }
+
+    const { title, content, categoryId, published } = body.data;
 
     const newArticle = await prisma.article.create({
       data: {
         title,
-        content,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        content: content as any, // Prisma expects Json, Zod validates structure if we went deeper
         published: published || false,
         authorId: session.user.id,
         categoryId: categoryId,
