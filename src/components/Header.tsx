@@ -22,9 +22,9 @@ export default function Header() {
       elevation={0}
       sx={{
         borderBottom: '1px solid',
-        borderColor: 'divider',
-        bgcolor: 'rgba(255, 255, 255, 0.8)',
-        backdropFilter: 'blur(8px)',
+        borderColor: '#333',
+        bgcolor: 'rgba(18, 18, 18, 0.95)',
+        backdropFilter: 'blur(12px)',
       }}
     >
       <Container maxWidth="lg">
@@ -35,13 +35,14 @@ export default function Header() {
             href="/"
             sx={{
               flexGrow: 1,
-              fontWeight: 700,
+              fontWeight: 800,
               color: 'primary.main',
               textDecoration: 'none',
-              letterSpacing: '-0.5px'
+              letterSpacing: '-0.5px',
+              fontStyle: 'italic'
             }}
           >
-            Tech Docs
+            Nano Banana Pro
           </Typography>
 
           {status === 'loading' ? (
@@ -55,11 +56,18 @@ export default function Header() {
                 color="primary"
                 disableElevation
                 size="small"
-                sx={{ borderRadius: 2, textTransform: 'none', fontWeight: 600 }}
+                sx={{
+                  borderRadius: 2,
+                  textTransform: 'none',
+                  fontWeight: 700,
+                  color: 'black',
+                  bgcolor: 'primary.main',
+                  '&:hover': { bgcolor: '#E6C200' }
+                }}
               >
                 Crear Post
               </Button>
-              <IconButton sx={{ p: 0, border: '2px solid', borderColor: 'primary.light' }}>
+              <IconButton sx={{ p: 0, border: '2px solid', borderColor: 'primary.main' }}>
                 <Avatar
                   alt={session.user?.name || 'User'}
                   src={session.user?.image || ''}
@@ -69,20 +77,38 @@ export default function Header() {
               <Button
                 color="inherit"
                 onClick={() => signOut()}
-                sx={{ textTransform: 'none', color: 'text.secondary' }}
+                sx={{ textTransform: 'none', color: '#888', '&:hover': { color: 'white' } }}
               >
                 Salir
               </Button>
             </Box>
           ) : (
-            <Button
-              color="primary"
-              variant="outlined"
-              onClick={() => signIn()}
-              sx={{ borderRadius: 2, textTransform: 'none', fontWeight: 600 }}
-            >
-              Iniciar Sesión
-            </Button>
+            <Box sx={{ display: 'flex', gap: 1 }}>
+              <Button
+                component={Link}
+                href="/login"
+                color="inherit"
+                sx={{ borderRadius: 2, textTransform: 'none', fontWeight: 600, color: 'white' }}
+              >
+                Inicia Sesión
+              </Button>
+              <Button
+                component={Link}
+                href="/register"
+                variant="contained"
+                color="primary"
+                sx={{
+                  borderRadius: 2,
+                  textTransform: 'none',
+                  fontWeight: 700,
+                  color: 'black',
+                  bgcolor: 'primary.main',
+                  '&:hover': { bgcolor: '#E6C200' }
+                }}
+              >
+                Regístrate
+              </Button>
+            </Box>
           )}
         </Toolbar>
       </Container>

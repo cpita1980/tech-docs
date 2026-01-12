@@ -59,13 +59,21 @@ export default async function Home({
       <Header />
 
       {/* Hero Section */}
-      <Box sx={{ bgcolor: "primary.main", color: "primary.contrastText", py: 8, mb: 6 }}>
+      {/* Hero Section */}
+      <Box sx={{
+        bgcolor: "#121212",
+        borderBottom: "1px solid #333",
+        color: "white",
+        py: 10,
+        mb: 6,
+        backgroundImage: "radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, rgba(18, 18, 18, 0) 50%)"
+      }}>
         <Container maxWidth="lg">
-          <Typography variant="h2" component="h1" fontWeight="bold" gutterBottom>
-            Documentación Técnica
+          <Typography variant="h2" component="h1" fontWeight="800" gutterBottom sx={{ color: "primary.main" }}>
+            Nano Banana Pro
           </Typography>
-          <Typography variant="h5" sx={{ opacity: 0.9 }}>
-            Tu hub central de conocimiento y recursos.
+          <Typography variant="h5" sx={{ opacity: 0.8, color: "gray", maxWidth: "600px" }}>
+            Documentación técnica de alto rendimiento para el ecosistema moderno.
           </Typography>
         </Container>
       </Box>
@@ -88,16 +96,20 @@ export default async function Home({
                   <Card
                     sx={{
                       height: "100%",
-                      transition: "transform 0.2s, box-shadow 0.2s",
+                      transition: "transform 0.2s, box-shadow 0.2s, border-color 0.2s",
                       "&:hover": {
                         transform: "translateY(-4px)",
-                        boxShadow: 6,
+                        boxShadow: "0 8px 24px rgba(255, 215, 0, 0.15)",
+                        borderColor: "primary.main"
                       },
                       display: "flex",
                       flexDirection: "column",
-                      borderRadius: 2
+                      borderRadius: 2,
+                      bgcolor: "#1E1E1E",
+                      border: "1px solid #333",
+                      color: "white"
                     }}
-                    elevation={2}
+                    elevation={0}
                   >
                     <CardActionArea component={Link} href={`/article?id=${article.id}`} sx={{ flexGrow: 1, display: "flex", flexDirection: "column", alignItems: "flex-start", p: 0 }}>
                       <CardContent sx={{ p: 3, width: "100%", flexGrow: 1 }}>
@@ -131,10 +143,10 @@ export default async function Home({
                             {(article.author?.name || "A")[0]}
                           </Avatar>
                           <Box>
-                            <Typography variant="subtitle2" component="div">
+                            <Typography variant="subtitle2" component="div" sx={{ color: "white" }}>
                               {article.author?.name || "Anónimo"}
                             </Typography>
-                            <Typography variant="caption" color="text.secondary">
+                            <Typography variant="caption" sx={{ color: "gray" }}>
                               {formatDate(article.createdAt)}
                             </Typography>
                           </Box>
