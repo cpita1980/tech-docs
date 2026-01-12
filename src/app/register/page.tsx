@@ -66,11 +66,14 @@ export default function RegisterPage() {
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             sx={{
-                                '& .MuiInputLabel-root': { color: '#888' },
+                                '& .MuiInputLabel-root': { color: '#8892b0' },
+                                '& .MuiInputLabel-root.Mui-focused': { color: '#00f3ff' },
                                 '& .MuiOutlinedInput-root': {
-                                    color: 'white',
-                                    '& fieldset': { borderColor: '#444' },
-                                    '&:hover fieldset': { borderColor: '#FFD700' },
+                                    color: '#ccd6f6',
+                                    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                                    '& fieldset': { borderColor: '#233554' },
+                                    '&:hover fieldset': { borderColor: '#8892b0' },
+                                    '&.Mui-focused fieldset': { borderColor: '#00f3ff' },
                                 },
                             }}
                         />
@@ -83,11 +86,14 @@ export default function RegisterPage() {
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             sx={{
-                                '& .MuiInputLabel-root': { color: '#888' },
+                                '& .MuiInputLabel-root': { color: '#8892b0' },
+                                '& .MuiInputLabel-root.Mui-focused': { color: '#00f3ff' },
                                 '& .MuiOutlinedInput-root': {
-                                    color: 'white',
-                                    '& fieldset': { borderColor: '#444' },
-                                    '&:hover fieldset': { borderColor: '#FFD700' },
+                                    color: '#ccd6f6',
+                                    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                                    '& fieldset': { borderColor: '#233554' },
+                                    '&:hover fieldset': { borderColor: '#8892b0' },
+                                    '&.Mui-focused fieldset': { borderColor: '#00f3ff' },
                                 },
                             }}
                         />
@@ -100,11 +106,14 @@ export default function RegisterPage() {
                             value={formData.password}
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             sx={{
-                                '& .MuiInputLabel-root': { color: '#888' },
+                                '& .MuiInputLabel-root': { color: '#8892b0' },
+                                '& .MuiInputLabel-root.Mui-focused': { color: '#00f3ff' },
                                 '& .MuiOutlinedInput-root': {
-                                    color: 'white',
-                                    '& fieldset': { borderColor: '#444' },
-                                    '&:hover fieldset': { borderColor: '#FFD700' },
+                                    color: '#ccd6f6',
+                                    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                                    '& fieldset': { borderColor: '#233554' },
+                                    '&:hover fieldset': { borderColor: '#8892b0' },
+                                    '&.Mui-focused fieldset': { borderColor: '#00f3ff' },
                                 },
                             }}
                         />
@@ -125,7 +134,7 @@ export default function RegisterPage() {
                         </Button>
                     </form>
                     <Box sx={{ mt: 2, textAlign: 'center' }}>
-                        <Link href="/api/auth/signin" style={{ color: '#FFD700', textDecoration: 'none' }}>
+                        <Link href="/api/auth/signin" style={{ color: '#00f3ff', textDecoration: 'none' }}>
                             Already have an account? Sign In
                         </Link>
                     </Box>

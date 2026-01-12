@@ -66,11 +66,14 @@ function LoginForm() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         sx={{
-                            '& .MuiInputLabel-root': { color: '#888' },
+                            '& .MuiInputLabel-root': { color: '#8892b0' },
+                            '& .MuiInputLabel-root.Mui-focused': { color: '#00f3ff' },
                             '& .MuiOutlinedInput-root': {
-                                color: 'white',
-                                '& fieldset': { borderColor: '#444' },
-                                '&:hover fieldset': { borderColor: '#FFD700' },
+                                color: '#ccd6f6',
+                                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                                '& fieldset': { borderColor: '#233554' },
+                                '&:hover fieldset': { borderColor: '#8892b0' },
+                                '&.Mui-focused fieldset': { borderColor: '#00f3ff' },
                             },
                         }}
                     />
@@ -83,11 +86,14 @@ function LoginForm() {
                         value={formData.password}
                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         sx={{
-                            '& .MuiInputLabel-root': { color: '#888' },
+                            '& .MuiInputLabel-root': { color: '#8892b0' },
+                            '& .MuiInputLabel-root.Mui-focused': { color: '#00f3ff' },
                             '& .MuiOutlinedInput-root': {
-                                color: 'white',
-                                '& fieldset': { borderColor: '#444' },
-                                '&:hover fieldset': { borderColor: '#FFD700' },
+                                color: '#ccd6f6',
+                                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                                '& fieldset': { borderColor: '#233554' },
+                                '&:hover fieldset': { borderColor: '#8892b0' },
+                                '&.Mui-focused fieldset': { borderColor: '#00f3ff' },
                             },
                         }}
                     />
@@ -115,7 +121,7 @@ function LoginForm() {
                     variant="outlined"
                     startIcon={<GoogleIcon />}
                     onClick={() => signIn('google', { callbackUrl })}
-                    sx={{ mb: 2, color: 'white', borderColor: '#444', '&:hover': { borderColor: '#FFD700' } }}
+                    sx={{ mb: 2, color: 'white', borderColor: '#444', '&:hover': { borderColor: '#00f3ff' } }}
                 >
                     Sign in with Google
                 </Button>
@@ -124,13 +130,13 @@ function LoginForm() {
                     variant="outlined"
                     startIcon={<GitHubIcon />}
                     onClick={() => signIn('github', { callbackUrl })}
-                    sx={{ color: 'white', borderColor: '#444', '&:hover': { borderColor: '#FFD700' } }}
+                    sx={{ color: 'white', borderColor: '#444', '&:hover': { borderColor: '#00f3ff' } }}
                 >
                     Sign in with GitHub
                 </Button>
 
                 <Box sx={{ mt: 3, textAlign: 'center' }}>
-                    <Link href="/register" style={{ color: '#FFD700', textDecoration: 'none' }}>
+                    <Link href="/register" style={{ color: '#00f3ff', textDecoration: 'none' }}>
                         Don&apos;t have an account? Sign Up
                     </Link>
                 </Box>
