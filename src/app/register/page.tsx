@@ -38,19 +38,19 @@ export default function RegisterPage() {
     };
 
     return (
-        <Box sx={{ minHeight: '100vh', bgcolor: '#020c1b', color: 'white' }}>
+        <Box sx={{ minHeight: '100vh', bgcolor: 'var(--background)', color: 'var(--foreground)' }}>
             <Header />
             <Container maxWidth="sm" sx={{ mt: 8 }}>
-                <Paper sx={{ p: 4, bgcolor: '#112240', borderRadius: 2, border: '1px solid #233554' }}>
+                <Paper sx={{ p: 4, bgcolor: 'var(--card-bg)', borderRadius: 2, border: '1px solid var(--border)' }}>
                     <Box sx={{ textAlign: 'center', mb: 3 }}>
                         <Typography variant="h4" component="h1" sx={{
                             fontWeight: 'bold',
-                            color: '#00f3ff', // Electric Blue
-                            textShadow: '0 0 10px rgba(0, 243, 255, 0.3)'
+                            color: 'var(--primary)',
+                            textShadow: 'none' // Removed neon shadow for readability
                         }}>
                             GKDOCS
                         </Typography>
-                        <Typography variant="subtitle1" sx={{ color: '#8892b0' }}>
+                        <Typography variant="subtitle1" sx={{ color: 'var(--secondary)' }}>
                             Create your account
                         </Typography>
                     </Box>
@@ -66,14 +66,14 @@ export default function RegisterPage() {
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             sx={{
-                                '& .MuiInputLabel-root': { color: '#8892b0' },
-                                '& .MuiInputLabel-root.Mui-focused': { color: '#00f3ff' },
+                                '& .MuiInputLabel-root': { color: 'var(--secondary)' },
+                                '& .MuiInputLabel-root.Mui-focused': { color: 'var(--primary)' },
                                 '& .MuiOutlinedInput-root': {
-                                    color: '#ccd6f6',
+                                    color: 'var(--foreground)',
                                     backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                                    '& fieldset': { borderColor: '#233554' },
-                                    '&:hover fieldset': { borderColor: '#8892b0' },
-                                    '&.Mui-focused fieldset': { borderColor: '#00f3ff' },
+                                    '& fieldset': { borderColor: 'var(--border)' },
+                                    '&:hover fieldset': { borderColor: 'var(--foreground)' },
+                                    '&.Mui-focused fieldset': { borderColor: 'var(--primary)' },
                                 },
                             }}
                         />
@@ -86,14 +86,14 @@ export default function RegisterPage() {
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             sx={{
-                                '& .MuiInputLabel-root': { color: '#8892b0' },
-                                '& .MuiInputLabel-root.Mui-focused': { color: '#00f3ff' },
+                                '& .MuiInputLabel-root': { color: 'var(--secondary)' },
+                                '& .MuiInputLabel-root.Mui-focused': { color: 'var(--primary)' },
                                 '& .MuiOutlinedInput-root': {
-                                    color: '#ccd6f6',
+                                    color: 'var(--foreground)',
                                     backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                                    '& fieldset': { borderColor: '#233554' },
-                                    '&:hover fieldset': { borderColor: '#8892b0' },
-                                    '&.Mui-focused fieldset': { borderColor: '#00f3ff' },
+                                    '& fieldset': { borderColor: 'var(--border)' },
+                                    '&:hover fieldset': { borderColor: 'var(--foreground)' },
+                                    '&.Mui-focused fieldset': { borderColor: 'var(--primary)' },
                                 },
                             }}
                         />
@@ -106,14 +106,14 @@ export default function RegisterPage() {
                             value={formData.password}
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             sx={{
-                                '& .MuiInputLabel-root': { color: '#8892b0' },
-                                '& .MuiInputLabel-root.Mui-focused': { color: '#00f3ff' },
+                                '& .MuiInputLabel-root': { color: 'var(--secondary)' },
+                                '& .MuiInputLabel-root.Mui-focused': { color: 'var(--primary)' },
                                 '& .MuiOutlinedInput-root': {
-                                    color: '#ccd6f6',
+                                    color: 'var(--foreground)',
                                     backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                                    '& fieldset': { borderColor: '#233554' },
-                                    '&:hover fieldset': { borderColor: '#8892b0' },
-                                    '&.Mui-focused fieldset': { borderColor: '#00f3ff' },
+                                    '& fieldset': { borderColor: 'var(--border)' },
+                                    '&:hover fieldset': { borderColor: 'var(--foreground)' },
+                                    '&.Mui-focused fieldset': { borderColor: 'var(--primary)' },
                                 },
                             }}
                         />
@@ -123,10 +123,10 @@ export default function RegisterPage() {
                             variant="contained"
                             sx={{
                                 mt: 3,
-                                bgcolor: '#00f3ff',
-                                color: '#020c1b',
+                                bgcolor: 'var(--primary)',
+                                color: 'white',
                                 fontWeight: 'bold',
-                                '&:hover': { bgcolor: '#00c2cc' },
+                                '&:hover': { bgcolor: 'var(--primary)', opacity: 0.9 },
                             }}
                             disabled={loading}
                         >
@@ -134,7 +134,7 @@ export default function RegisterPage() {
                         </Button>
                     </form>
                     <Box sx={{ mt: 2, textAlign: 'center' }}>
-                        <Link href="/api/auth/signin" style={{ color: '#00f3ff', textDecoration: 'none' }}>
+                        <Link href="/api/auth/signin" style={{ color: 'var(--primary)', textDecoration: 'none' }}>
                             Already have an account? Sign In
                         </Link>
                     </Box>

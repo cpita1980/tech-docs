@@ -27,8 +27,8 @@ export default function Sidebar() {
                 position: 'fixed',
                 left: 0,
                 top: 0,
-                bgcolor: '#112240', // Card BG color
-                borderRight: '1px solid #233554',
+                bgcolor: 'var(--card-bg)',
+                borderRight: '1px solid var(--border)',
                 display: { xs: 'none', md: 'flex' },
                 flexDirection: 'column',
                 zIndex: 1200,
@@ -41,7 +41,7 @@ export default function Sidebar() {
                     sx={{
                         width: 40,
                         height: 40,
-                        bgcolor: 'primary.main',
+                        bgcolor: 'var(--primary)',
                         borderRadius: 1,
                         clipPath: 'polygon(0% 0%, 100% 0%, 100% 75%, 75% 100%, 0% 100%)',
                         display: 'flex',
@@ -49,17 +49,17 @@ export default function Sidebar() {
                         alignItems: 'center',
                         fontWeight: 'bold',
                         fontSize: '1.5rem',
-                        color: 'primary.contrastText'
+                        color: 'var(--primary-foreground)'
                     }}
                 >
                     G
                 </Box>
-                <Typography variant="h6" sx={{ fontWeight: 800, color: 'white', letterSpacing: 1 }}>
+                <Typography variant="h6" sx={{ fontWeight: 800, color: 'var(--foreground)', letterSpacing: 1 }}>
                     GKDOCS
                 </Typography>
             </Box>
 
-            <Divider sx={{ borderColor: '#233554' }} />
+            <Divider sx={{ borderColor: 'var(--border)' }} />
 
             {/* Navigation */}
             <List sx={{ px: 2, py: 2 }}>
@@ -72,19 +72,19 @@ export default function Sidebar() {
                                 href={item.path}
                                 sx={{
                                     borderRadius: 2,
-                                    bgcolor: isActive ? 'rgba(0, 243, 255, 0.1)' : 'transparent',
-                                    color: isActive ? 'primary.main' : '#8892b0',
+                                    bgcolor: isActive ? 'rgba(59, 130, 246, 0.1)' : 'transparent', // var(--primary) with opacity
+                                    color: isActive ? 'var(--primary)' : 'var(--secondary)',
                                     '&:hover': {
-                                        bgcolor: 'rgba(0, 243, 255, 0.05)',
-                                        color: 'primary.main',
-                                        '& .MuiListItemIcon-root': { color: 'primary.main' },
+                                        bgcolor: 'rgba(59, 130, 246, 0.05)',
+                                        color: 'var(--primary)',
+                                        '& .MuiListItemIcon-root': { color: 'var(--primary)' },
                                     },
                                 }}
                             >
                                 <ListItemIcon
                                     sx={{
                                         minWidth: 40,
-                                        color: isActive ? 'primary.main' : '#8892b0'
+                                        color: isActive ? 'var(--primary)' : 'var(--secondary)'
                                     }}
                                 >
                                     {item.icon}
@@ -109,11 +109,11 @@ export default function Sidebar() {
                 <ListItemButton
                     sx={{
                         borderRadius: 2,
-                        color: '#8892b0',
-                        '&:hover': { color: 'white' }
+                        color: 'var(--secondary)',
+                        '&:hover': { color: 'var(--foreground)' }
                     }}
                 >
-                    <ListItemIcon sx={{ minWidth: 40, color: '#8892b0' }}>
+                    <ListItemIcon sx={{ minWidth: 40, color: 'var(--secondary)' }}>
                         <SettingsIcon />
                     </ListItemIcon>
                     <ListItemText primary="Settings" />

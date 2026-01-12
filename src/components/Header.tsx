@@ -22,8 +22,8 @@ export default function Header() {
       elevation={0}
       sx={{
         borderBottom: '1px solid',
-        borderColor: '#233554',
-        bgcolor: 'rgba(2, 12, 27, 0.85)',
+        borderColor: 'var(--border)',
+        bgcolor: 'rgba(15, 23, 42, 0.85)', // Slate 950 with opacity
         backdropFilter: 'blur(12px)',
       }}
     >
@@ -36,11 +36,10 @@ export default function Header() {
             sx={{
               flexGrow: 1,
               fontWeight: 800,
-              color: 'primary.main',
+              color: 'var(--primary)',
               textDecoration: 'none',
               letterSpacing: '1px',
               fontStyle: 'normal',
-              textShadow: '0 0 10px rgba(0, 243, 255, 0.5)'
             }}
           >
             GKDOCS
@@ -54,21 +53,20 @@ export default function Header() {
                 component={Link}
                 href="/admin/new-post"
                 variant="contained"
-                color="primary"
                 disableElevation
                 size="small"
                 sx={{
                   borderRadius: 2,
                   textTransform: 'none',
                   fontWeight: 700,
-                  color: 'black',
-                  bgcolor: 'primary.main',
-                  '&:hover': { bgcolor: '#E6C200' }
+                  color: 'white',
+                  bgcolor: 'var(--primary)',
+                  '&:hover': { bgcolor: 'var(--primary)', opacity: 0.9 }
                 }}
               >
                 Crear Post
               </Button>
-              <IconButton sx={{ p: 0, border: '2px solid', borderColor: 'primary.main' }}>
+              <IconButton sx={{ p: 0, border: '2px solid', borderColor: 'var(--primary)' }}>
                 <Avatar
                   alt={session.user?.name || 'User'}
                   src={session.user?.image || ''}
@@ -78,7 +76,7 @@ export default function Header() {
               <Button
                 color="inherit"
                 onClick={() => signOut()}
-                sx={{ textTransform: 'none', color: '#888', '&:hover': { color: 'white' } }}
+                sx={{ textTransform: 'none', color: 'var(--secondary)', '&:hover': { color: 'var(--foreground)' } }}
               >
                 Salir
               </Button>
@@ -89,7 +87,7 @@ export default function Header() {
                 component={Link}
                 href="/login"
                 color="inherit"
-                sx={{ borderRadius: 2, textTransform: 'none', fontWeight: 600, color: 'white' }}
+                sx={{ borderRadius: 2, textTransform: 'none', fontWeight: 600, color: 'var(--foreground)' }}
               >
                 Inicia Sesión
               </Button>
@@ -97,14 +95,13 @@ export default function Header() {
                 component={Link}
                 href="/register"
                 variant="contained"
-                color="primary"
                 sx={{
                   borderRadius: 2,
                   textTransform: 'none',
                   fontWeight: 700,
-                  color: 'black',
-                  bgcolor: 'primary.main',
-                  '&:hover': { bgcolor: '#E6C200' }
+                  color: 'white',
+                  bgcolor: 'var(--primary)',
+                  '&:hover': { bgcolor: 'var(--primary)', opacity: 0.9 }
                 }}
               >
                 Regístrate

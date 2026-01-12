@@ -40,16 +40,16 @@ function LoginForm() {
 
     return (
         <Container maxWidth="sm" sx={{ mt: 8 }}>
-            <Paper sx={{ p: 4, bgcolor: '#112240', borderRadius: 2, border: '1px solid #233554' }}>
+            <Paper sx={{ p: 4, bgcolor: 'var(--card-bg)', borderRadius: 2, border: '1px solid var(--border)' }}>
                 <Box sx={{ textAlign: 'center', mb: 3 }}>
                     <Typography variant="h4" component="h1" sx={{
                         fontWeight: 'bold',
-                        color: '#00f3ff', // Electric Blue
-                        textShadow: '0 0 10px rgba(0, 243, 255, 0.3)'
+                        color: 'var(--primary)',
+                        textShadow: 'none' // Removed neon shadow for readability
                     }}>
                         GKDOCS
                     </Typography>
-                    <Typography variant="subtitle1" sx={{ color: '#8892b0' }}>
+                    <Typography variant="subtitle1" sx={{ color: 'var(--secondary)' }}>
                         Welcome back.
                     </Typography>
                 </Box>
@@ -66,14 +66,14 @@ function LoginForm() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         sx={{
-                            '& .MuiInputLabel-root': { color: '#8892b0' },
-                            '& .MuiInputLabel-root.Mui-focused': { color: '#00f3ff' },
+                            '& .MuiInputLabel-root': { color: 'var(--secondary)' },
+                            '& .MuiInputLabel-root.Mui-focused': { color: 'var(--primary)' },
                             '& .MuiOutlinedInput-root': {
-                                color: '#ccd6f6',
+                                color: 'var(--foreground)',
                                 backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                                '& fieldset': { borderColor: '#233554' },
-                                '&:hover fieldset': { borderColor: '#8892b0' },
-                                '&.Mui-focused fieldset': { borderColor: '#00f3ff' },
+                                '& fieldset': { borderColor: 'var(--border)' },
+                                '&:hover fieldset': { borderColor: 'var(--foreground)' },
+                                '&.Mui-focused fieldset': { borderColor: 'var(--primary)' },
                             },
                         }}
                     />
@@ -86,14 +86,14 @@ function LoginForm() {
                         value={formData.password}
                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         sx={{
-                            '& .MuiInputLabel-root': { color: '#8892b0' },
-                            '& .MuiInputLabel-root.Mui-focused': { color: '#00f3ff' },
+                            '& .MuiInputLabel-root': { color: 'var(--secondary)' },
+                            '& .MuiInputLabel-root.Mui-focused': { color: 'var(--primary)' },
                             '& .MuiOutlinedInput-root': {
-                                color: '#ccd6f6',
+                                color: 'var(--foreground)',
                                 backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                                '& fieldset': { borderColor: '#233554' },
-                                '&:hover fieldset': { borderColor: '#8892b0' },
-                                '&.Mui-focused fieldset': { borderColor: '#00f3ff' },
+                                '& fieldset': { borderColor: 'var(--border)' },
+                                '&:hover fieldset': { borderColor: 'var(--foreground)' },
+                                '&.Mui-focused fieldset': { borderColor: 'var(--primary)' },
                             },
                         }}
                     />
@@ -103,10 +103,10 @@ function LoginForm() {
                         variant="contained"
                         sx={{
                             mt: 3,
-                            bgcolor: '#00f3ff',
-                            color: '#020c1b',
+                            bgcolor: 'var(--primary)',
+                            color: 'white',
                             fontWeight: 'bold',
-                            '&:hover': { bgcolor: '#00c2cc' },
+                            '&:hover': { bgcolor: 'var(--primary)', opacity: 0.9 },
                         }}
                         disabled={loading}
                     >
@@ -114,14 +114,14 @@ function LoginForm() {
                     </Button>
                 </form>
 
-                <Divider sx={{ my: 3, borderColor: '#444' }}>OR</Divider>
+                <Divider sx={{ my: 3, borderColor: 'var(--border)' }}>OR</Divider>
 
                 <Button
                     fullWidth
                     variant="outlined"
                     startIcon={<GoogleIcon />}
                     onClick={() => signIn('google', { callbackUrl })}
-                    sx={{ mb: 2, color: 'white', borderColor: '#444', '&:hover': { borderColor: '#00f3ff' } }}
+                    sx={{ mb: 2, color: 'var(--foreground)', borderColor: 'var(--border)', '&:hover': { borderColor: 'var(--primary)', color: 'var(--primary)' } }}
                 >
                     Sign in with Google
                 </Button>
@@ -130,13 +130,13 @@ function LoginForm() {
                     variant="outlined"
                     startIcon={<GitHubIcon />}
                     onClick={() => signIn('github', { callbackUrl })}
-                    sx={{ color: 'white', borderColor: '#444', '&:hover': { borderColor: '#00f3ff' } }}
+                    sx={{ color: 'var(--foreground)', borderColor: 'var(--border)', '&:hover': { borderColor: 'var(--primary)', color: 'var(--primary)' } }}
                 >
                     Sign in with GitHub
                 </Button>
 
                 <Box sx={{ mt: 3, textAlign: 'center' }}>
-                    <Link href="/register" style={{ color: '#00f3ff', textDecoration: 'none' }}>
+                    <Link href="/register" style={{ color: 'var(--primary)', textDecoration: 'none' }}>
                         Don&apos;t have an account? Sign Up
                     </Link>
                 </Box>
@@ -147,7 +147,7 @@ function LoginForm() {
 
 export default function LoginPage() {
     return (
-        <Box sx={{ minHeight: '100vh', bgcolor: '#121212', color: 'white' }}>
+        <Box sx={{ minHeight: '100vh', bgcolor: 'var(--background)', color: 'var(--foreground)' }}>
             <Header />
             <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', mt: 8 }}><CircularProgress /></Box>}>
                 <LoginForm />

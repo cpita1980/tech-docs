@@ -1,11 +1,17 @@
 :root {
-  --background: #020c1b;
-  --foreground: #ccd6f6;
-  --primary: #00f3ff;
-  --primary-foreground: #020c1b;
-  --secondary: #8892b0;
-  --card-bg: #112240;
-  --border: #233554;
+  --background: #0f172a;
+  /* Slate 950 */
+  --foreground: #f8fafc;
+  /* Slate 50 */
+  --primary: #3b82f6;
+  /* Blue 500 */
+  --primary-foreground: #ffffff;
+  --secondary: #64748b;
+  /* Slate 500 */
+  --card-bg: #1e293b;
+  /* Slate 800 */
+  --border: #334155;
+  /* Slate 700 */
 }
 
 html,

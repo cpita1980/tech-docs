@@ -80,17 +80,17 @@ export default async function Home(props: {
             <Box sx={{
               p: 4,
               borderRadius: 2,
-              bgcolor: "#112240",
-              border: "1px solid #233554",
+              bgcolor: "var(--card-bg)",
+              border: "1px solid var(--border)",
               height: "100%",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center"
             }}>
-              <Typography variant="h5" fontWeight="bold" sx={{ color: "#00f3ff", mb: 2 }}>
+              <Typography variant="h5" fontWeight="bold" sx={{ color: "var(--primary)", mb: 2 }}>
                 Start Creating
               </Typography>
-              <Typography sx={{ color: "#8892b0", mb: 3 }}>
+              <Typography sx={{ color: "var(--secondary)", mb: 3 }}>
                 Create deep technical documentation with our advanced editor.
               </Typography>
               <Box>
@@ -98,8 +98,12 @@ export default async function Home(props: {
                   component={Link}
                   href="/admin/new-post"
                   variant="contained"
-                  color="primary"
-                  sx={{ fontWeight: "bold", color: "#020c1b" }}
+                  sx={{
+                    fontWeight: "bold",
+                    color: "white",
+                    bgcolor: "var(--primary)",
+                    "&:hover": { bgcolor: "var(--primary)", opacity: 0.9 }
+                  }}
                 >
                   Create New Document
                 </Button>
@@ -108,19 +112,19 @@ export default async function Home(props: {
           </Grid>
           <Grid size={{ xs: 12, md: 4 }}>
             {/* Stats placeholder */}
-            <Box sx={{ p: 4, borderRadius: 2, bgcolor: "#112240", border: "1px solid #233554", height: "100%" }}>
-              <Typography variant="overline" sx={{ color: "#8892b0" }}>Total Documents</Typography>
-              <Typography variant="h3" fontWeight="bold" sx={{ color: "white" }}>{totalArticles}</Typography>
+            <Box sx={{ p: 4, borderRadius: 2, bgcolor: "var(--card-bg)", border: "1px solid var(--border)", height: "100%" }}>
+              <Typography variant="overline" sx={{ color: "var(--secondary)" }}>Total Documents</Typography>
+              <Typography variant="h3" fontWeight="bold" sx={{ color: "var(--foreground)" }}>{totalArticles}</Typography>
             </Box>
           </Grid>
         </Grid>
 
-        <Typography variant="h5" fontWeight="bold" sx={{ color: "white", mb: 3 }}>
+        <Typography variant="h5" fontWeight="bold" sx={{ color: "var(--foreground)", mb: 3 }}>
           Recent Documents
         </Typography>
 
         {articles.length === 0 ? (
-          <Paper sx={{ p: 4, textAlign: "center", bgcolor: "#112240", border: "1px solid #233554" }}>
+          <Paper sx={{ p: 4, textAlign: "center", bgcolor: "var(--card-bg)", border: "1px solid var(--border)" }}>
             <Typography variant="h6" color="text.secondary">
               No documents found.
             </Typography>
@@ -136,15 +140,15 @@ export default async function Home(props: {
                       transition: "transform 0.2s, box-shadow 0.2s, border-color 0.2s",
                       "&:hover": {
                         transform: "translateY(-4px)",
-                        boxShadow: "0 8px 24px rgba(0, 243, 255, 0.1)",
-                        borderColor: "#00f3ff"
+                        boxShadow: "0 8px 24px rgba(59, 130, 246, 0.15)", // var(--primary) shadow
+                        borderColor: "var(--primary)"
                       },
                       display: "flex",
                       flexDirection: "column",
                       borderRadius: 2,
-                      bgcolor: "#112240",
-                      border: "1px solid #233554",
-                      color: "white"
+                      bgcolor: "var(--card-bg)",
+                      border: "1px solid var(--border)",
+                      color: "var(--foreground)"
                     }}
                     elevation={0}
                   >
@@ -154,8 +158,8 @@ export default async function Home(props: {
                           <Box sx={{
                             p: 1,
                             borderRadius: 1,
-                            bgcolor: 'rgba(0, 243, 255, 0.1)',
-                            color: '#00f3ff'
+                            bgcolor: 'rgba(59, 130, 246, 0.1)', // var(--primary) light
+                            color: 'var(--primary)'
                           }}>
                             <span style={{ fontSize: '1.2rem' }}>📄</span>
                           </Box>
@@ -164,30 +168,30 @@ export default async function Home(props: {
                             size="small"
                             sx={{
                               fontWeight: 600,
-                              bgcolor: 'rgba(136, 146, 176, 0.1)',
-                              color: '#8892b0',
-                              border: '1px solid #233554'
+                              bgcolor: 'rgba(100, 116, 139, 0.1)', // var(--secondary) light
+                              color: 'var(--secondary)',
+                              border: '1px solid var(--border)'
                             }}
                           />
                         </Box>
 
                         <Typography variant="h6" fontWeight="bold" gutterBottom sx={{
-                          color: '#ccd6f6',
+                          color: 'var(--foreground)',
                           minHeight: "3.2em",
                           lineHeight: 1.3
                         }}>
                           {article.title}
                         </Typography>
 
-                        <Box sx={{ display: "flex", alignItems: "center", mt: 'auto', pt: 2, borderTop: '1px solid #233554' }}>
+                        <Box sx={{ display: "flex", alignItems: "center", mt: 'auto', pt: 2, borderTop: '1px solid var(--border)' }}>
                           <Avatar
                             src={article.author?.image || ""}
                             alt={article.author?.name || "Author"}
-                            sx={{ width: 24, height: 24, mr: 1, border: '1px solid #00f3ff' }}
+                            sx={{ width: 24, height: 24, mr: 1, border: '1px solid var(--primary)' }}
                           >
                             {(article.author?.name || "A")[0]}
                           </Avatar>
-                          <Typography variant="caption" sx={{ color: "#8892b0" }}>
+                          <Typography variant="caption" sx={{ color: "var(--secondary)" }}>
                             {formatDate(article.createdAt)}
                           </Typography>
                         </Box>
@@ -214,7 +218,7 @@ export default async function Home(props: {
                         component={Link}
                         href={`/?page=${item.page || 1}`}
                         {...item}
-                        sx={{ color: 'white' }}
+                        sx={{ color: 'var(--foreground)' }}
                       />
                     )}
                   />
