@@ -22,8 +22,8 @@ export default function Header() {
       elevation={0}
       sx={{
         borderBottom: '1px solid',
-        borderColor: '#333',
-        bgcolor: 'rgba(18, 18, 18, 0.95)',
+        borderColor: '#233554',
+        bgcolor: 'rgba(2, 12, 27, 0.85)',
         backdropFilter: 'blur(12px)',
       }}
     >
@@ -38,11 +38,12 @@ export default function Header() {
               fontWeight: 800,
               color: 'primary.main',
               textDecoration: 'none',
-              letterSpacing: '-0.5px',
-              fontStyle: 'italic'
+              letterSpacing: '1px',
+              fontStyle: 'normal',
+              textShadow: '0 0 10px rgba(0, 243, 255, 0.5)'
             }}
           >
-            Nano Banana Pro
+            GKDOCS
           </Typography>
 
           {status === 'loading' ? (

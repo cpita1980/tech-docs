@@ -40,13 +40,17 @@ function LoginForm() {
 
     return (
         <Container maxWidth="sm" sx={{ mt: 8 }}>
-            <Paper sx={{ p: 4, bgcolor: '#1E1E1E', borderRadius: 2, border: '1px solid #FFD700' }}>
+            <Paper sx={{ p: 4, bgcolor: '#112240', borderRadius: 2, border: '1px solid #233554' }}>
                 <Box sx={{ textAlign: 'center', mb: 3 }}>
-                    <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold', color: '#FFD700' }}>
-                        Nano Banana Pro
+                    <Typography variant="h4" component="h1" sx={{
+                        fontWeight: 'bold',
+                        color: '#00f3ff', // Electric Blue
+                        textShadow: '0 0 10px rgba(0, 243, 255, 0.3)'
+                    }}>
+                        GKDOCS
                     </Typography>
-                    <Typography variant="subtitle1" sx={{ color: '#ccc' }}>
-                        Sign In to your account
+                    <Typography variant="subtitle1" sx={{ color: '#8892b0' }}>
+                        Welcome back.
                     </Typography>
                 </Box>
 
@@ -93,10 +97,10 @@ function LoginForm() {
                         variant="contained"
                         sx={{
                             mt: 3,
-                            bgcolor: '#FFD700',
-                            color: 'black',
+                            bgcolor: '#00f3ff',
+                            color: '#020c1b',
                             fontWeight: 'bold',
-                            '&:hover': { bgcolor: '#E6C200' },
+                            '&:hover': { bgcolor: '#00c2cc' },
                         }}
                         disabled={loading}
                     >
